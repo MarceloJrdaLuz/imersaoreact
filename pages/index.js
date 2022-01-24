@@ -111,7 +111,7 @@ export default function PaginaInicial() {
               </Text>
 
               <TextField
-              onChange={e => {setNovo(false),setUserName(e.target.value)} }
+              onChange={e => {setNovo(false),setUserName(e.target.value), novo === '' ?? setNovo(false)} }
                 fullWidth
                 textFieldColors={{
                   neutral: {
