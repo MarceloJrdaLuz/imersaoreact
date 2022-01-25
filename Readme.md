@@ -1,0 +1,1 @@
+Acrescentado o avatar generico para user novo, e validando pelo menos dois caracteres para poder setar o usuario
