@@ -10,17 +10,20 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+    const iconeSend = <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+    </svg>
 
-    useEffect(()=>{
+    useEffect(() => {
         supabaseClient
-        .from('mensagens')
-        .select('*')
-        .order('id', {ascending: false})
-        .then(({data}) => {
-            setListaDeMensagens(data)
-        })
-    },[])
-   
+            .from('mensagens')
+            .select('*')
+            .order('id', { ascending: false })
+            .then(({ data }) => {
+                setListaDeMensagens(data)
+            })
+    }, [])
+
 
 
     /*
@@ -47,7 +50,7 @@ export default function ChatPage() {
                 // tem que ser um objeto com os MESMOS CAMPOS que escreveu no supabase
                 mensagem
             ])
-            .then(({data})=> {
+            .then(({ data }) => {
                 console.log('Criando mensagem', data)
                 setListaDeMensagens([
                     data[0],
@@ -135,8 +138,12 @@ export default function ChatPage() {
                                 color: appConfig.theme.colors.neutrals[200],
                             }}
                         >
-
                         </TextField>
+                        <Button label='Send' colorVariant='positive' onClick={()=>{
+                            handleNovaMensagem(mensagem);
+                        }}>
+
+                        </Button>
                         <Box>
                         </Box>
 
@@ -166,6 +173,7 @@ function Header() {
 }
 
 function MessageList(props) {
+    
     console.log(props);
     return (
         <Box
